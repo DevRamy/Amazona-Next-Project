@@ -11,8 +11,8 @@ const ProductScreen = () => {
 
     const {state, dispatch} = useContext(Store);
 
-    const {query} = useRouter();
-
+    const router = useRouter();
+    const {query} = router;
     const {slug} = query;
 
     const product = data
@@ -28,6 +28,7 @@ const ProductScreen = () => {
         const quantity = existItem ? existItem.quantity + 1 : 1;
         if(product.countInStock < quantity) { alert('Out of stock'); return; }
         dispatch({type: actions.CART_ADD_ITEM, payload: {...product, quantity}})
+        router.push('/cart');
     }
 
 

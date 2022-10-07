@@ -22,7 +22,8 @@ const initialState = {
 };
 
 export const actions = {
-    CART_ADD_ITEM: 'CART_ADD_ITEM'
+    CART_ADD_ITEM: 'CART_ADD_ITEM',
+    CART_REMOVE_ITEM: 'CART_REMOVE_ITEM'
 };
 
 
@@ -32,7 +33,10 @@ function reducer(state = initialState, action : { type: any; payload: any; }) {
             const newItem = action.payload;
             const existItem = state.cart.cartItems.find(item => item.slug === newItem.slug);
             const cartItems = existItem? state.cart.cartItems.map(item => item.name === existItem.name ? newItem : item) : [...state.cart.cartItems, newItem];
-            return {...state, cart: {...state.cart, cartItems}}
+            return {...state, cart: {...state.cart, cartItems}};
+        case actions.CART_REMOVE_ITEM:
+             const newCartItems = state.cart.cartItems.filter((item) => item.slug !== action.payload.slug);
+             return {...state, cart: {...state.cart, cartItems: newCartItems}};
         default:
           return state;
     }
