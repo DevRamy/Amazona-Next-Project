@@ -1,4 +1,4 @@
-type product = {
+type Product = {
     name: string,
     slug: string,
     category: string,
@@ -12,4 +12,4 @@ type product = {
 };
 
 
-export default product;
+export default Product;
