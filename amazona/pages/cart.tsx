@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import Layout from "../components/layout";
 import { actions, Store } from "../utils/Store";
-import product from "../utils/types/product";
 
 const CartScreen = () => {
 
@@ -85,7 +84,7 @@ const CartScreen = () => {
                                 </div>
                             </li>
                             <li>
-                                <button className="primary-button w-full" onClick={() => router.push('/shipping')}>Check out</button>
+                                <button className="primary-button w-full" onClick={() => router.push('login?redirect=/shipping')}>Check out</button>
                             </li>
                         </ul>
                     </div>
