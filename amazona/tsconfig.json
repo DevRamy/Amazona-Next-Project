@@ -17,6 +17,6 @@
     "incremental": true,
     "noImplicitAny": true, 
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "models/Users.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "models/User.ts"],
   "exclude": ["node_modules"]
 }

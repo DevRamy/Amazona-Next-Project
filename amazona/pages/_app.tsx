@@ -1,12 +1,16 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { StoreProvider } from '../utils/Store'
+import { SessionProvider } from 'next-auth/react';
 
-function MyApp({ Component, pageProps }: AppProps) {
+//@ts-ignore
+function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
   return (
-    <StoreProvider>
-      <Component {...pageProps} />
-    </StoreProvider>
+    <SessionProvider session={session}>
+      <StoreProvider>
+        <Component {...pageProps} />
+      </StoreProvider>
+    </SessionProvider>
   )
 }
 

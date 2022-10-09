@@ -1,6 +1,8 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import {ReactNode, useContext} from "react";
+import 'react-toastify/dist/ReactToastify.css';
 import { Store } from "../utils/Store";
 
 
@@ -9,6 +11,8 @@ interface Props {
 }
 
 const Layout = ({children, ...props}: Props) => {
+
+    const {status, data: session} = useSession();
 
     const {state, dispatch} = useContext(Store);
     const {cart} = state;
@@ -33,9 +37,14 @@ const Layout = ({children, ...props}: Props) => {
                                 {cart.cartItems.length > 0 && <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">{cart.cartItems.reduce((a: any, c: any)  => a + c.quantity, 0)}</span>}
                             </a>
                         </Link>
-                        <Link href="/login">
-                            <a className="p-2">Login</a>
-                        </Link>
+                        {
+                            status === 'loading' ?
+                            ('loading') :
+                            session?.user ? (session?.user.name) :
+                            (<Link href="/login">
+                             <a className="p-2">Login</a>
+                            </Link>)
+                        }
                     </div>
                 </nav>
             </header>

@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import User from "../../models/Users";
+import User from "../../models/User";
 import db from "../../utils/db";
 import UserType from "../../utils/types/user";
 
