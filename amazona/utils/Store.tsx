@@ -13,8 +13,10 @@ const StoreContext : StoreContextInterface = {
 
 export const Store = createContext(StoreContext);
 
-const Cart: {cartItems: product[]} = {
-    cartItems: []
+const Cart: {cartItems: product[], shippingAddress: {}, paymentMethod: string} = {
+    cartItems: [],
+    shippingAddress: {},
+    paymentMethod: '',
 };
 
 const initialState = {
@@ -25,6 +27,7 @@ export const actions = {
     CART_ADD_ITEM: 'CART_ADD_ITEM',
     CART_REMOVE_ITEM: 'CART_REMOVE_ITEM',
     CART_REST: 'CART_REST',
+    SAVE_SHIPPING_ADDRESS: 'SAVE_SHIPPING_ADDRESS',
 };
 
 
@@ -45,6 +48,17 @@ function reducer(state = initialState, action : { type: any; payload: any; }) {
                     cartItems: [],
                     shippingAddress: {location: []},
                     paymentMethod: '',
+                },
+            };
+        case actions.SAVE_SHIPPING_ADDRESS:
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    shippingAddress: {
+                        ...state.cart.shippingAddress,
+                        ...action.payload,
+                    },
                 },
             };
         default:
