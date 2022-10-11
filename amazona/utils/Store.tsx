@@ -23,7 +23,8 @@ const initialState = {
 
 export const actions = {
     CART_ADD_ITEM: 'CART_ADD_ITEM',
-    CART_REMOVE_ITEM: 'CART_REMOVE_ITEM'
+    CART_REMOVE_ITEM: 'CART_REMOVE_ITEM',
+    CART_REST: 'CART_REST',
 };
 
 
@@ -37,6 +38,15 @@ function reducer(state = initialState, action : { type: any; payload: any; }) {
         case actions.CART_REMOVE_ITEM:
              const newCartItems = state.cart.cartItems.filter((item) => item.slug !== action.payload.slug);
              return {...state, cart: {...state.cart, cartItems: newCartItems}};
+        case actions.CART_REST:
+            return {
+                ...state,
+                cart: {
+                    cartItems: [],
+                    shippingAddress: {location: []},
+                    paymentMethod: '',
+                },
+            };
         default:
           return state;
     }
