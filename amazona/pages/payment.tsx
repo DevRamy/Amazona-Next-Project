@@ -66,4 +66,6 @@ const Payment = () => {
     </Layout>);
 }
 
+Payment.auth = true;
+
 export default Payment;

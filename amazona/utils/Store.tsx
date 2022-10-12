@@ -27,6 +27,7 @@ export const actions = {
     CART_ADD_ITEM: 'CART_ADD_ITEM',
     CART_REMOVE_ITEM: 'CART_REMOVE_ITEM',
     CART_REST: 'CART_REST',
+    CART_CLEAR_ITEMS: 'CART_CLEAR_ITEMS',
     SAVE_SHIPPING_ADDRESS: 'SAVE_SHIPPING_ADDRESS',
     SAVE_PAYMENT_METHOD: 'SAVE_PAYMENT_METHOD',
 };
@@ -68,6 +69,14 @@ function reducer(state = initialState, action : { type: any; payload: any; }) {
                 cart: {
                     ...state.cart,
                     paymentMethod: action.payload,
+                }
+            }
+        case actions.CART_CLEAR_ITEMS:
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    cartItems: [],
                 }
             }
         default:
