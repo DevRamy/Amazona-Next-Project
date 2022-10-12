@@ -9,6 +9,7 @@ export default async function handler (req : NextApiRequest, res : NextApiRespon
     await db.connect();
 
     await Product.deleteMany();
+    //@ts-ignore
     await Product.insertMany(products.products);
 
     await db.disconnect();

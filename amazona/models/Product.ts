@@ -17,5 +17,4 @@ const productSchema = new mongoose.Schema(
     }
 );
 
-//@ts-ignore
-export default mongoose.model.Product ? mongoose.model.Product : mongoose.model('Product',productSchema);
+export default  mongoose.models.Product ? mongoose.models.Product : mongoose.model('Product',productSchema);

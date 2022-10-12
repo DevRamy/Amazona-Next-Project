@@ -6,18 +6,10 @@ import Product from '../utils/types/product';
 
 interface Props {
     product: Product, 
+    addToCartHandler: any,
 }
 
-const ProductItem = ({product,...props}: Props) => {
-
-    const {state,dispatch} = useContext(Store);
-
-    const addToCartHandler = () => {
-        const existItem = state.cart.cartItems.find((x: Product) => x.slug === product.slug);
-        const quantity = existItem ? existItem.quantity + 1 : 1;
-        if(product.countInStock < quantity) { alert('Out of stock'); return; }
-        dispatch({type: actions.CART_ADD_ITEM, payload: {...product, quantity}});
-    }
+const ProductItem = ({product, addToCartHandler ,...props}: Props) => {
 
     return (
         <div className="card">
@@ -38,7 +30,7 @@ const ProductItem = ({product,...props}: Props) => {
                  </Link>
                  <p className="mb-2">{product.brand}</p>
                  <p>${product.price}</p>
-                 <button className="primary-button" type="button" onClick={() => addToCartHandler()}>Add to cart</button>
+                 <button className="primary-button" type="button" onClick={() => addToCartHandler(product)}>Add to cart</button>
             </div>
         </div>
     );
