@@ -28,6 +28,7 @@ export const actions = {
     CART_REMOVE_ITEM: 'CART_REMOVE_ITEM',
     CART_REST: 'CART_REST',
     SAVE_SHIPPING_ADDRESS: 'SAVE_SHIPPING_ADDRESS',
+    SAVE_PAYMENT_METHOD: 'SAVE_PAYMENT_METHOD',
 };
 
 
@@ -61,6 +62,14 @@ function reducer(state = initialState, action : { type: any; payload: any; }) {
                     },
                 },
             };
+        case actions.SAVE_PAYMENT_METHOD:
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    paymentMethod: action.payload,
+                }
+            }
         default:
           return state;
     }
