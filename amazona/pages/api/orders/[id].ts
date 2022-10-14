@@ -8,20 +8,15 @@ export default async function handler (req : NextApiRequest, res : NextApiRespon
     const session = await getSession({req});
 
     if(!session) {
-        return res.status(401).send('signin required');
+        res.status(401).send('signin required');
     }
-    
-    const { user } = session;
 
     await db.connect();
 
-    const newOrder = new Order({
-        ...req.body,
-        // @ts-ignore
-        user: user?._id,
-    });
+    //@ts-ignore
+    const order = await Order.findById(req.query.id);
 
-    const order = await newOrder.save();
+    await db.disconnect();
 
-    res.status(201).send(order);
+    res.status(200).send(order);
 }
